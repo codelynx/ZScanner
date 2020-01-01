@@ -19,8 +19,7 @@ When you are expecting one of some keyword, you may use array of strings to scan
 
 ```.swift
 let scanner = ZScanner(string: "true")
-let a = scanner.scan(strings: ["true", "false"]) 
-a // true
+let value = scanner.scan(strings: ["true", "false"])  // "true"
 ```
 
 If you like to scan associated indirect value, you may use dictionary to scan, and it returns its associated value instad of direct keyword. 
@@ -44,6 +43,7 @@ protocol ZScannable {
 	init?(_ scanner: ZScanner)
 }
 ```
+
 
 Here is an example of providing extension of `Bool`. 
 
@@ -98,7 +98,7 @@ You may use `options` to scan case insensitive keyword.
 
 ```.swift
 let scanner = ZScanner(string: "hElLo")
-let hello2 = scanner.scan(string: "hello", options: [.caseInsensitive]) // "hElLo"
+let hello = scanner.scan(string: "hello", options: [.caseInsensitive]) // "hElLo"
 ```
 
 #### License
