@@ -45,6 +45,7 @@ protocol ZScannable {
 }
 ```
 
+
 Here is an example of providing extension of `Bool`. 
 
 ```.swift
