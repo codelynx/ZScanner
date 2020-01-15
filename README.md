@@ -18,8 +18,8 @@ let y = scanner.scanInteger() // 512
 When you are expecting one of some keyword, you may use array of strings to scan.
 
 ```.swift
-let scanner = ZScanner(string: "true")
-let a = scanner.scan(strings: ["true", "false"]) 
+let scanner = ZScanner(token: "true")
+let a = scanner.scan(tokens: ["true", "false"]) 
 a // true
 ```
 
@@ -94,12 +94,23 @@ scanner.scanWhitespaces()
 let hello2 = scanner.scan(string: "hello") // "hello"
 ```
 
+To ignore whitespaces for scanning a token, use `scan(token:)`  whereas `scan(string:)` do not ignore any whitespaces to go on.
+
+```.swift
+let scanner = ZScanner(string: "    func hello ( )")
+let t1 = scanner.scan(token: "func") // "func"
+let t2 = scanner.scanIdentifier() // "hello"
+let t3 = scanner.scan(token: "(")
+let t4 = scanner.scan(token: ")")
+```
+
 You may use `options` to scan case insensitive keyword. 
 
 ```.swift
 let scanner = ZScanner(string: "hElLo")
-let hello2 = scanner.scan(string: "hello", options: [.caseInsensitive]) // "hElLo"
+let hello = scanner.scan(string: "hello", options: [.caseInsensitive]) // "hElLo"
 ```
+
 
 #### License
 MIT License

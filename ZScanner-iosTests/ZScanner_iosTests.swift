@@ -123,6 +123,35 @@ class ZScanner_iosTests: XCTestCase {
 		XCTAssert(a == "not_found_404")
 	}
 
+	func testTokens() {
+		let scanner = ZScanner(string: """
+			func doubling(value: Float) -> Float {
+				return value * 2
+			}
+			""")
+		let token1 = scanner.scan(token: "func")
+		let fname1 = scanner.scanIdentifier()
+		let _ = scanner.scan(token: "(")
+		let variable1 = scanner.scanIdentifier()
+		let _ = scanner.scan(string: ":")
+		let type1 = scanner.scan(tokens: ["Float", "Int"])
+		let _ = scanner.scan(token: ")")
+		let _ = scanner.scan(token: "->")
+		let type2 = scanner.scan(tokens: ["Float", "Int"])
+		let _ = scanner.scan(token: "{")
+		let return1 = scanner.scan(token: "return")
+		let variable2 = scanner.scanIdentifier()
+		let _ = scanner.scan(token: "*")
+		let value2 = scanner.scanInteger() as Int?
+		let _ = scanner.scan(token: "}")
+		XCTAssert(token1 == "func")
+		XCTAssert(fname1 == "doubling")
+		XCTAssert(variable1 == "value" && variable2 == "value")
+		XCTAssert(type1 == "Float" && type2 == "Float")
+		XCTAssert(return1 == "return")
+		XCTAssert(value2 == 2)
+	}
+
 	func testPerformanceExample() {
 		// This is an example of a performance test case.
 		self.measure {

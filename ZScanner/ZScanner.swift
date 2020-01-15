@@ -148,6 +148,10 @@ class ZScanner {
 		self.location = savepoint
 		return nil
 	}
+	func scan(token: String, options: NSString.CompareOptions = NSString.CompareOptions(rawValue: 0)) -> String? {
+		self.scanWhitespaces()
+		return self.scan(string: token, options: options)
+	}
 	func scan(strings: [String], options: NSString.CompareOptions = NSString.CompareOptions(rawValue: 0)) -> String? {
 		for string in strings {
 			if let string = self.scan(string: string, options: options) {
@@ -155,6 +159,10 @@ class ZScanner {
 			}
 		}
 		return nil
+	}
+	func scan(tokens: [String], options: NSString.CompareOptions = NSString.CompareOptions(rawValue: 0)) -> String? {
+		self.scanWhitespaces()
+		return self.scan(strings: tokens, options: options)
 	}
 	func scanSign() -> Int? {
 		return self.scan(dictionary: ["+": 1, "-": -1])
@@ -258,6 +266,7 @@ class ZScanner {
 	static var identifierFirstCharacters: String { Self.lowercaseAlphabets + Self.uppercaseAlphabets + "_" }
 	static var identifierFollowingCharacters: String { Self.lowercaseAlphabets + Self.uppercaseAlphabets + Self.digits + "_" }
 	func scanIdentifier() -> String? {
+		self.scanWhitespaces()
 		var identifier: String?
 		let savepoint = self.location
 		let firstCharacterSet = ZCharacterSet(charactersInString: Self.identifierFirstCharacters)
