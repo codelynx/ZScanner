@@ -2,6 +2,10 @@
 
 `ZScanner` aims enhancement or replacement of `Scanner` in Foundation framework.  
 
+![xcode](https://img.shields.io/badge/Xcode-11.4-blue)
+![swift](https://img.shields.io/badge/Swift-5.1-orange.svg)
+![license](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 ### Basic Usage
 
 ```.swift
